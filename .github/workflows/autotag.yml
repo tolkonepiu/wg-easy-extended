@@ -1,0 +1,24 @@
+name: Auto-create new tag
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "Dockerfile"
+      - "tailscale.sh"
+
+jobs:
+  auto-tag:
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⤵️ Check out code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GH_PAT }}
+
+      - name: 🏷 Create new tag
+        uses: valitydev/action-autotag@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
