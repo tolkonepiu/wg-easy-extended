@@ -1,0 +1,53 @@
+name: Build
+
+on:
+  pull_request:
+    branches:
+      - "*"
+  push:
+    tags:
+      - "v[0-9].*.*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build image
+    steps:
+      - name: 📥 Checkout the repository
+        uses: actions/checkout@v3
+
+      - name: 🏗 Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: 🏗 Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: 🪄 Extract metadata (tags, labels)
+        id: meta
+        uses: docker/metadata-action@v3
+        with:
+          images: |
+            ghcr.io/${{ github.repository }}
+          tags: |
+            type=ref,event=pr
+            type=semver,pattern=v{{version}}
+            type=semver,pattern=v{{major}}.{{minor}}
+            type=semver,pattern=v{{major}}
+
+      - name: 🔓 Registry login
+        if: github.event_name == 'push'
+        uses: docker/login-action@v1.14.1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 🛠️ Build image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile
+          platforms: linux/amd64,linux/arm64,linux/386,linux/arm/v7
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          push: ${{ github.event_name == 'push' }}
