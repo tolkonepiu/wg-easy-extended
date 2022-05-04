@@ -1,6 +1,6 @@
 FROM weejewel/wg-easy:4
 
-# hadolint ignore=DL3023
+# hadolint ignore=DL3022,DL3023
 COPY --from=mindflavor/prometheus-wireguard-exporter:3.5.1 /usr/local/bin/prometheus_wireguard_exporter /usr/local/bin/
 
 RUN apk add -U --no-cache \
