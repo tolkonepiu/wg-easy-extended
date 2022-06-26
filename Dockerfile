@@ -1,4 +1,4 @@
-FROM weejewel/wg-easy:6
+FROM weejewel/wg-easy:7
 
 # hadolint ignore=DL3022,DL3023
 COPY --from=mindflavor/prometheus-wireguard-exporter:3.6.3 /usr/local/bin/prometheus_wireguard_exporter /usr/local/bin/
