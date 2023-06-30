@@ -6,6 +6,7 @@ COPY --from=mindflavor/prometheus-wireguard-exporter:3.6.4 /usr/local/bin/promet
 RUN apk add -U --no-cache \
   wireguard-tools=1.0.20200102-r0
 
+# shellcheck disable=SC2016
 RUN sed \
     -i '1,/^\[Peer\]/{s//[Peer]\n# friendly_name = ${client.name}\n# (${clientId})/}' \
     lib/WireGuard.js
