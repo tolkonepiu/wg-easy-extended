@@ -14,7 +14,7 @@ jobs:
     name: Build image
     steps:
       - name: 📥 Checkout the repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: 🏗 Set up QEMU
         uses: docker/setup-qemu-action@v2
