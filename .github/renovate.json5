@@ -1,6 +1,7 @@
 {
   extends: ["config:base"],
   dependencyDashboard: false,
+  commitMessagePrefix: "[{{updateType}}] ",
   packageRules: [
     {
       matchUpdateTypes: ["minor", "patch", "pin", "digest"],
