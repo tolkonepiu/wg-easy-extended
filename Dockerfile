@@ -1,4 +1,4 @@
-FROM ghcr.io/wg-easy/wg-easy:13
+FROM ghcr.io/wg-easy/wg-easy:14
 
 # hadolint ignore=DL3022,DL3023
 COPY --from=mindflavor/prometheus-wireguard-exporter:3.6.6 /usr/local/bin/prometheus_wireguard_exporter /usr/local/bin/
