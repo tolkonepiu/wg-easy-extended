@@ -2,6 +2,12 @@
 
 All-in-one: [wg-easy](https://github.com/wg-easy/wg-easy) + [prometheus-wireguard-exporter](https://github.com/MindFlavor/prometheus_wireguard_exporter)
 
+> [!IMPORTANT]
+>
+> The project is no longer maintained and has been archived. Starting with wg-easy version 15, native Prometheus metrics functionality
+> is included, rendering this extension obsolete. For more details, refer to the official wg-easy
+> [Prometheus metrics documentation](https://github.com/wg-easy/wg-easy/blob/master/docs/content/advanced/metrics/prometheus.md).
+
 ## Run
 
 <pre>
